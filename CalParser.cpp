@@ -65,49 +65,37 @@ namespace CalParser {
         Operators currentOp;
         while (formula[pt]) {
             ToFirstNoneBlank(pt);
-
             if (!formula[pt])
                 break;
 
+
             currentOp = getOperators(pt);
 
-            if (currentOp == BracketLeft) {
+            if (currentOp == BracketLeft) Op.push(currentOp);
+
+            else if (currentOp == BracketRight) CalTillPrevLeftBracket();
+
+            else if (state == 0 && currentOp != Error) {
+
+                if (currentOp == Addition && numberState == 0) numberState = 1;
+
+                else if (currentOp == Subtraction && numberState == 0) numberState = -1;
+
+                else throw 1;
+
+            } else if (state == 0) {
+
+                number.push(GetNumber(pt) * (numberState == 0 ? 1 : numberState));
+                state = 1;
+
+            } else if (state == 1) {
+
+                while (!Op.empty() && Op.top() >= currentOp && Op.top() != BracketLeft) CalFirst();
+
                 Op.push(currentOp);
-                continue;
-            }
-            if (currentOp == BracketRight) {
-                CalTillPrevLeftBracket();
-                continue;
-            }
+                numberState = 0;
+                state = 0;
 
-            if (state == 0 && currentOp != Error) {
-                if (currentOp == Addition && numberState == 0) {
-                    numberState = 1;
-                    continue;
-                }
-                if (currentOp == Subtraction && numberState == 0) {
-                    numberState = -1;
-                    continue;
-                }
-
-                throw 1;
-            }
-
-            switch (state) {
-                case 0:
-                    number.push(GetNumber(pt) * (numberState == 0 ? 1 : numberState));
-                    state = 1;
-                    break;
-
-                case 1:
-
-                    while (!Op.empty() && Op.top() >= currentOp && Op.top() != BracketLeft) {
-                        CalFirst();
-                    }
-                    Op.push(currentOp);
-                    numberState = 0;
-                    state = 0;
-                    break;
             }
         }
 
