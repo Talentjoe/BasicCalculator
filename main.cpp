@@ -77,6 +77,7 @@ int main() {
     AssertErrorPram<double, string>(getAnsOfFormula, "1..2");
     AssertErrorPram<double, string>(getAnsOfFormula, "3a");
     AssertErrorPram<double, string>(getAnsOfFormula, "a");
+    AssertErrorPram<double, string>(getAnsOfFormula, "(1)*(*1)");
     cout << "Error Expression Passed" << endl << endl;
 
     return 0;
