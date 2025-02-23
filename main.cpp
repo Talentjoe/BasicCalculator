@@ -1,5 +1,5 @@
 #include <iostream>
-#include<assert.h>
+#include<cassert>
 #include "CalParser.h"
 
 #define DELTA 0.0000001
@@ -18,7 +18,7 @@ void AssertDoubleEqual(double a, double b) {
 }
 
 template<class R, class T>
-void AssertErrorPram(function<R(T)> f, T b) {
+void AssertErrorPram(const function<R(T)>& f, const T& b) {
     try {
         f(b);
         cout<<"Warning: "<<b<<" did not through error\n";

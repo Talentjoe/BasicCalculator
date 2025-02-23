@@ -1,7 +1,3 @@
-//
-// Created by lenovo on 2025/2/18.
-//
-
 #include "CalParser.h"
 
 namespace CalParser {
@@ -105,4 +101,4 @@ namespace CalParser {
         Caled = true;
         return number.top();
     }
-} // CalParser
+}

@@ -1,7 +1,3 @@
-//
-// Created by lenovo on 2025/2/18.
-//
-
 #ifndef CALPARSER_H
 #define CALPARSER_H
 
@@ -9,7 +5,7 @@
 #include<string>
 #include<functional>
 #include<unordered_map>
-#include<math.h>
+#include<cmath>
 
 namespace CalParser {
 
@@ -19,7 +15,6 @@ class CalParser {
         Subtraction,
         Multiplication,
         Division,
-        //Modulus,
         Exponentiation,
         BracketLeft,
         BracketRight,
@@ -31,7 +26,6 @@ class CalParser {
         {Subtraction,std::minus<double>()},
         {Multiplication,std::multiplies<double>()},
         {Division,std::divides<double>()},
-      //  {Modulus,std::modulus<double>()},
         {Exponentiation, [](double a, double b)->double {return exp(log(a)*b) ;} },
     };
 
@@ -54,6 +48,6 @@ public:
 
 };
 
-} // CalParser
+}
 
-#endif //CALPARSER_H
+#endif
