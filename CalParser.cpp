@@ -18,7 +18,7 @@ namespace CalParser {
         return currentNum;
     }
 
-    CalParser::Operators CalParser::getOperators(int &pt) {
+    CalParser::Operators CalParser::GetOperator(int &pt) {
         switch (formula[pt++]) {
             case '+': return Addition;
             case '-': return Subtraction;
@@ -53,7 +53,7 @@ namespace CalParser {
     }
 
     double CalParser::Calculate() {
-        if (Caled) return number.top();
+        if (caled) return number.top();
         int pt = 0;
         int state = 0;
         int numberState = 0;
@@ -65,7 +65,7 @@ namespace CalParser {
                 break;
 
 
-            currentOp = getOperators(pt);
+            currentOp = GetOperator(pt);
 
             if (currentOp == BracketLeft) Op.push(currentOp);
 

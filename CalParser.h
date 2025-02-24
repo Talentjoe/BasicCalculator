@@ -32,17 +32,17 @@ class CalParser {
     const std::string & formula;
     std::stack<double> number;
     std::stack<Operators> Op;
-    bool Caled;
+    bool caled;
 
-    void ToFirstNoneBlank(int &pt) { while (std::isspace(formula[pt])) pt++; }
-    char CharToNum(char a) {return a-'0';}
+    void ToFirstNoneBlank(int &pt) const { while (std::isspace(formula[pt])) pt++; }
+    static char CharToNum(char a) {return a-'0';}
     double GetNumber(int& pt);
-    Operators getOperators(int &pt);
+    Operators GetOperator(int &pt);
     void CalTillPrevLeftBracket();
     void CalFirst();
 
 public:
-    CalParser(const std::string& formula) : formula(formula), Caled(false){}
+    explicit CalParser(const std::string& formula) : formula(formula), caled(false){}
     double Calculate();
 
 
