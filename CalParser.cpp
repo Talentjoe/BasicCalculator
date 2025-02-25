@@ -98,7 +98,7 @@ namespace CalParser {
         while (!Op.empty()) {
             CalTillPrevLeftBracket();
         }
-        Caled = true;
+        caled = true;
         return number.top();
     }
 }
